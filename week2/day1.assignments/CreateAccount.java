@@ -1,49 +1,74 @@
-package week2.day1.Assignments;
+package week2.day1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class CreateAccount {
 
 	public static void main(String[] args) {
-		/*
-		 * //Pseudo Code
-		 * 
-		 * 1. Launch URL "http://leaftaps.com/opentaps/control/login"
-		 * 
-		 * 2. Enter UserName and Password Using Id Locator
-		 * 
-		 * 3. Click on Login Button using Class Locator
-		 * 
-		 * 4. Click on CRM/SFA Link
-		 * 
-		 * 5. Click on Accounts Button
-		 * 
-		 * 6. Click on Create Account
-		 *  
-		 * 7. Enter AccountName Field Using Xpath Locator value as Debit Limited Account
-		 * 
-		 * 8. Enter DEscriptiion as "Selenium Automation Tester"
-		 * 
-		 * 9. Enter LocalName Field Using Xpath Locator
-		 * 
-		 * 10. Enter SiteName Field Using Xpath Locator
-		 * 
-		 * 11. Enter value for AnnualRevenue Field using Xpath Locator but class as Attribute
-		 * 
-		 * 12. Select Industry as ComputerSoftware
-		 * 
-		 * 13. Select OwnerShip as S-Corporation using SelectByVisibletext
-		 * 
-		 * 14. Select Source as Employee using SelectByValue
-		 * 
-		 * 15. Select Marketing Campaign as eCommerce Site Internal Campaign using SelectbyIndex
-		 * 
-		 * 16. Select State/Province as Texas using SelectByValue 
-		 * 
-		 * 17. Click on Create Account using Xpath Locator
-        
-      
-        
-      
-		 */
-	}
+		WebDriverManager.chromedriver().setup();
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("http://leaftaps.com/opentaps");
+		driver.manage().window().maximize();
+		driver.findElement(By.id("username")).sendKeys("DemoSalesManager");
+		driver.findElement(By.id("password")).sendKeys("crmsfa");
+		driver.findElement(By.className("decorativeSubmit")).click();
+		String title = driver.getTitle();
+		System.out.println(title);
+		driver.findElement(By.linkText("CRM/SFA")).click();
+		driver.findElement(By.linkText("Create Account")).click();
+		driver.findElement(By.id("accountName")).sendKeys("Current Account");
+		driver.findElement(By.name("parentPartyId")).sendKeys("democlass1");
+		driver.findElement(By.id("groupNameLocal")).sendKeys("Current");
+		driver.findElement(By.id("officeSiteName")).sendKeys("Amazon");
+		driver.findElement(By.id("annualRevenue")).sendKeys("1000000000");
+		WebElement industry = driver.findElement(By.name("industryEnumId"));
+		Select dd1 = new Select(industry);
+		dd1.selectByVisibleText("Computer Software");
+		driver.findElement(By.id("numberEmployees")).sendKeys("1500");
+		WebElement ownership = driver.findElement(By.name("ownershipEnumId"));
+		Select dd2 = new Select(ownership);
+		dd2.selectByValue("OWN_LLC_LLP");
+		driver.findElement(By.id("sicCode")).sendKeys("12345678");
+		driver.findElement(By.id("tickerSymbol")).sendKeys("1234");
+		WebElement source = driver.findElement(By.name("dataSourceId"));
+		Select dd3 = new Select(source);
+		dd3.selectByVisibleText("Existing Customer");
+		WebElement market = driver.findElement(By.name("marketingCampaignId"));
+		Select dd4 = new Select(market);
+		dd4.selectByVisibleText("Automobile");
+		WebElement initialTeam = driver.findElement(By.name("initialTeamPartyId"));
+		Select dd5 = new Select(initialTeam);
+		dd5.selectByValue("DemoSalesTeam1");
+		driver.findElement(By.name("description")).sendKeys("Account creation");
+		driver.findElement(By.name("importantNote")).sendKeys("NA");
+		driver.findElement(By.id("primaryPhoneAreaCode")).sendKeys("527");
+		driver.findElement(By.id("primaryPhoneNumber")).sendKeys("9566229840");
+		driver.findElement(By.id("primaryPhoneExtension")).sendKeys("236");
+		driver.findElement(By.id("primaryPhoneAskForName")).sendKeys("Naveen");
+		driver.findElement(By.id("primaryEmail")).sendKeys("naveenraj050795@gmail.com");
+		driver.findElement(By.id("primaryWebUrl")).sendKeys("NA");
+		driver.findElement(By.id("generalToName")).sendKeys("Naveen");
+		driver.findElement(By.id("generalAttnName")).sendKeys("Naveen");
+		driver.findElement(By.id("generalAddress1")).sendKeys("6A Muthu Street,");
+		driver.findElement(By.id("generalAddress2")).sendKeys("Kolathur, Chennai -99");
+		driver.findElement(By.id("generalCity")).sendKeys("Chennai");
+		WebElement country = driver.findElement(By.name("generalCountryGeoId"));
+		Select dd6 = new Select(country);
+		dd6.selectByValue("IND");
+		driver.findElement(By.id("generalPostalCode")).sendKeys("600099");
+		WebElement state = driver.findElement(By.name("generalStateProvinceGeoId"));
+		Select dd7 = new Select(state);
+		dd7.selectByIndex(25);
+		driver.findElement(By.id("generalPostalCodeExt")).sendKeys("238");
+		driver.findElement(By.className("smallSubmit")).click();
+		String title1 = driver.getTitle();
+		System.out.println(title1);
+		
+	} 
 
 }
